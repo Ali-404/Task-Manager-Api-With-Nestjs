@@ -21,6 +21,11 @@ export class TasksController {
         return this._tasksService.create(dto)
     }
 
+    @Get("/:id")
+    show(@Param("id") id: number){
+        return this._tasksService.findOne(id)
+    }
+
     @Patch(":id/update")
     update( @Param("id") id:number, @Body() {title}: UpdateTaskTitle){
         return this._tasksService.updateTitle(id, title)

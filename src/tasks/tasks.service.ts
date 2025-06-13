@@ -21,8 +21,10 @@ export class TasksService {
         return this._taskRepo.save(newTask)
     }
 
-    findOne(id: number): Promise<Task> {
-        return this._taskRepo.findOneBy({ id });
+    async findOne(id: number): Promise<Task> {
+        const task = await this._taskRepo.findOneBy({ id });
+        if (!task) throw new NotFoundException(`Task with ID ${id} not found`)
+        return task
     }
 
     async updateTitle(id:number, title:string): Promise<Task>{
